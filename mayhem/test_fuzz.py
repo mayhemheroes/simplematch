@@ -9,8 +9,8 @@ def testOneInput(data):
     fdp = atheris.FuzzedDataProvider(data)
     num = fdp.ConsumeIntInRange(0, 1)
 
-    str_1 = fdp.ConsumeString(64)
-    str_2 = fdp.ConsumeString(64)
+    str_1 = fdp.ConsumeUnicodeNoSurrogates(64)
+    str_2 = fdp.ConsumeUnicodeNoSurrogates(64)
 
     if num == 0:
         sm.match(pattern=str_1, string=str_2)
