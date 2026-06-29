@@ -1,0 +1,14 @@
+# Mayhem target: simplematch string pattern matcher (Atheris/libFuzzer harness).
+# The cmd binary is the compiled ELF launcher that drives mayhem/test_fuzz.py; Atheris
+# instruments the simplematch library so the run records coverage (edges).
+project: simplematch
+target: test_fuzz
+
+cmds:
+  - cmd: /mayhem/test_fuzz
+    libfuzzer: true
+
+# Seed corpus of representative pattern/string inputs (file:// URIs, per the Mayhemfile schema).
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/test_fuzz/testsuite
